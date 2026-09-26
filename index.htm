@@ -1,421 +1,759 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitud de Propuesta | Soluciones Digitales</title>
-    <style>
-        :root {
-            --primary-color: #0d6efd;
-            --whatsapp-color: #25D366;
-            --bg-color: #f8f9fa;
-            --text-color: #212529;
-            --border-color: #dee2e6;
-            --radius: 8px;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 40px;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .form-header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 20px;
-        }
-        .form-header h1 {
-            font-size: 24px;
-            margin: 0 0 10px 0;
-            color: var(--primary-color);
-        }
-        .form-header p {
-            color: #6c757d;
-            margin: 0;
-            font-size: 14px;
-        }
-        fieldset {
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-        legend {
-            font-weight: 700;
-            color: var(--primary-color);
-            padding: 0 10px;
-            font-size: 16px;
-        }
-        .form-group {
-            margin-bottom: 18px;
-        }
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        label .required {
-            color: #dc3545;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="url"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius);
-            font-size: 14px;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
-        }
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
-        }
-        .radio-group, .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 5px;
-        }
-        .radio-group label, .checkbox-group label {
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-        }
-        .btn-submit {
-            width: 100%;
-            padding: 14px;
-            background-color: var(--whatsapp-color);
-            color: #fff;
-            border: none;
-            border-radius: var(--radius);
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .btn-submit:hover {
-            background-color: #1ebe5d;
-        }
-        .btn-submit svg {
-            width: 22px;
-            height: 22px;
-            fill: #fff;
-        }
-        .form-note {
-            font-size: 12px;
-            color: #6c757d;
-            text-align: center;
-            margin-top: 15px;
-        }
-        .success-msg {
-            display: none;
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            padding: 15px;
-            border-radius: var(--radius);
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 600;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solicitud de Propuesta — Soluciones Digitales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* === Shadcn tokens (HSL) === */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 7%;
+  --primary: 18 100% 50%;
+  --primary-foreground: 0 0% 98%;
+  --accent: 18 100% 50%;
+  --accent-foreground: 0 0% 98%;
+  --border: 240 6% 90%;
+  --input: 240 6% 90%;
+  --ring: 18 100% 50%;
+  --radius: 2.8px;
+
+  /* === Brand raw colors === */
+  --color-ember-orange: #ff4d00;
+  --primary-dark: #ff6a2b;
+  --color-soot: #121212;
+  --color-coal: #1a1a1a;
+  --color-ash: #3a3a3a;
+  --color-smoke: #6b6b6b;
+  --color-chalk-white: #f5f3ee;
+  --color-bone-white: #ebe7df;
+  --color-card-bg: #1a1a1a;
+  --color-black: #000000;
+
+  --radius-sm: 2.8px;
+  --radius-lg: 8px;
+  --border-radius: 8px;
+
+  --ghost-hover-bg: rgba(255,77,0,0.08);
+  --btn-invert-hover: rgba(255,77,0,0.12);
+
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --transition-snappy: all 0.2s ease;
+  --transition-med: all 0.25s ease;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  padding: 24px 16px 60px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-chalk-white);
+  background: var(--color-soot);
+  background-image:
+    radial-gradient(ellipse at top left, rgba(255,77,0,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at bottom right, rgba(255,77,0,0.04) 0%, transparent 55%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* === Container === */
+.form-container {
+  max-width: 820px;
+  margin: 0 auto;
+  background: var(--color-coal);
+  border: 1px solid var(--color-ash);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+}
+
+.form-container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-ember-orange), transparent);
+}
+
+/* === Header === */
+.form-header {
+  text-align: center;
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-ash);
+  position: relative;
+}
+
+.form-header .eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10.56px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ember-orange);
+  border: 1px dashed rgba(255,77,0,0.45);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  margin-bottom: 14px;
+}
+
+.form-header h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px 0;
+  color: var(--color-chalk-white);
+  text-transform: uppercase;
+}
+
+.form-header h1 span {
+  color: var(--color-ember-orange);
+  animation: pulseSoft 2s ease-in-out infinite;
+}
+
+.form-header p {
+  color: var(--color-smoke);
+  margin: 0;
+  font-size: 12.48px;
+  letter-spacing: 0.02em;
+}
+
+/* === Fieldset === */
+fieldset {
+  border: 1px solid var(--color-ash);
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  margin-bottom: 22px;
+  background: rgba(0,0,0,0.3);
+  transition: border-color 0.25s ease, background 0.25s ease;
+  position: relative;
+}
+
+fieldset:hover {
+  border-color: rgba(255,77,0,0.35);
+}
+
+legend {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 11.52px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ember-orange);
+  padding: 0 12px;
+  background: var(--color-coal);
+  border-radius: var(--radius-sm);
+}
+
+/* === Form groups === */
+.form-group { margin-bottom: 18px; }
+.form-group:last-child { margin-bottom: 0; }
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 11.52px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-bone-white);
+}
+
+label .required {
+  color: var(--color-ember-orange);
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+/* === Inputs === */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--color-soot);
+  color: var(--color-chalk-white);
+  border: 1px solid var(--color-ash);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 13.6px;
+  line-height: 1.5;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  appearance: none;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--color-smoke);
+  opacity: 0.7;
+}
+
+input:hover, select:hover, textarea:hover {
+  border-color: var(--color-smoke);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-ember-orange);
+  background: rgba(255,77,0,0.04);
+  box-shadow: 0 0 0 3px rgba(255,77,0,0.1);
+}
+
+select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ff4d00' stroke-width='3'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+select option {
+  background: var(--color-coal);
+  color: var(--color-chalk-white);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+  font-family: var(--font-mono);
+}
+
+/* === Checkbox group === */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.checkbox-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 11.52px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--color-bone-white);
+  background: var(--color-soot);
+  border: 1px solid var(--color-ash);
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  margin: 0;
+}
+
+.checkbox-group label:hover {
+  border-color: var(--color-ember-orange);
+  color: var(--color-ember-orange);
+  background: rgba(255,77,0,0.06);
+}
+
+.checkbox-group input[type="checkbox"] {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--color-smoke);
+  border-radius: 2.8px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.checkbox-group input[type="checkbox"]:checked {
+  background: var(--color-ember-orange);
+  border-color: var(--color-ember-orange);
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px; top: 1px;
+  width: 4px; height: 8px;
+  border: solid var(--color-soot);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* === Submit Button === */
+.btn-submit {
+  width: 100%;
+  padding: 16px 22px;
+  background: var(--color-ember-orange);
+  color: var(--color-soot);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 13.6px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.btn-submit:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255,77,0,0.3);
+}
+
+.btn-submit:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255,77,0,0.4);
+}
+
+.btn-submit:focus-visible {
+  outline: 2px solid var(--color-ember-orange);
+  outline-offset: 3px;
+}
+
+.btn-submit svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  transition: transform 0.25s ease;
+}
+
+.btn-submit:hover svg {
+  animation: fa-beat 0.6s ease-in-out infinite;
+}
+
+/* === Form note === */
+.form-note {
+  font-size: 10.56px;
+  color: var(--color-smoke);
+  text-align: center;
+  margin-top: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* === Success message === */
+.success-msg {
+  display: none;
+  background: rgba(255,77,0,0.12);
+  color: var(--color-chalk-white);
+  border: 1px solid rgba(255,77,0,0.35);
+  border-left: 3px solid var(--color-ember-orange);
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 22px;
+  font-family: var(--font-mono);
+  font-size: 12.48px;
+  letter-spacing: 0.02em;
+  animation: fadeIn 0.3s ease;
+}
+
+.success-msg.show { display: block; }
+
+/* === Help text === */
+.help-text {
+  font-size: 11.2px;
+  color: var(--color-smoke);
+  margin: -4px 0 14px 0;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+/* === Utility classes from spec === */
+.glow-primary {
+  box-shadow: 0 0 20px rgba(255,77,0,0.35);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-ember-orange), var(--primary-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* === Keyframes === */
+@keyframes fa-beat {
+  0%, 90% { transform: scale(1); }
+  45% { transform: scale(var(--fa-beat-scale, 1.25)); }
+}
+
+@keyframes fa-fade {
+  50% { opacity: var(--fa-fade-opacity, 0.4); }
+}
+
+@keyframes fa-beat-fade {
+  0%, to { opacity: var(--fa-beat-fade-opacity, 0.4); transform: scale(1); }
+  50% { opacity: 1; transform: scale(var(--fa-beat-fade-scale, 1.125)); }
+}
+
+@keyframes fa-flip {
+  50% { transform: rotate3d(var(--fa-flip-x,0), var(--fa-flip-y,1), var(--fa-flip-z,0), var(--fa-flip-angle,-180deg)); }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* === Reduced motion === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .form-header h1 span { animation: none; }
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  body { padding: 16px 12px 40px; }
+  .form-container { padding: 28px 20px; }
+  .form-header h1 { font-size: 32px; }
+  fieldset { padding: 18px 14px; }
+}
+
+@media (max-width: 480px) {
+  .form-header h1 { font-size: 26px; }
+  .form-container { padding: 22px 14px; }
+  .btn-submit { font-size: 12px; padding: 14px 16px; }
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-soot); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-ash);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-ember-orange); }
+</style>
 </head>
 <body>
 
 <div class="form-container">
-    <div class="form-header">
-        <h1>Cuéntanos sobre tu proyecto</h1>
-        <p>Completa este formulario y envíanos tu solicitud directo por WhatsApp. Te responderemos en menos de 48 horas.</p>
-    </div>
+  <div class="form-header">
+    <span class="eyebrow">// Propuesta en 48h</span>
+    <h1>Cuéntanos tu <span>proyecto</span></h1>
+    <p>Completa el formulario y envíalo directo a nuestro WhatsApp. Sin rodeos.</p>
+  </div>
 
-    <div class="success-msg" id="successMsg">
-        ✅ ¡Gracias! Abriendo WhatsApp para enviar tu solicitud...
-    </div>
+  <div class="success-msg" id="successMsg">
+    ▶ ¡Listo! Abriendo WhatsApp con tu solicitud…
+  </div>
 
-    <form id="lead-form">
-        
-        <!-- 1. DATOS DE CONTACTO Y EMPRESA -->
-        <fieldset>
-            <legend>1. Identificación</legend>
-            <div class="form-group">
-                <label for="fullName">Nombre completo <span class="required">*</span></label>
-                <input type="text" id="fullName" name="fullName" required placeholder="Ej: Ana García">
-            </div>
-            <div class="form-group">
-                <label for="companyName">Nombre de la empresa o proyecto <span class="required">*</span></label>
-                <input type="text" id="companyName" name="companyName" required placeholder="Ej: InnovaTech S.L.">
-            </div>
-            <div class="form-group">
-                <label for="email">Email corporativo <span class="required">*</span></label>
-                <input type="email" id="email" name="email" required placeholder="ana@innovatech.com">
-            </div>
-            <div class="form-group">
-                <label for="phone">Teléfono / WhatsApp</label>
-                <input type="tel" id="phone" name="phone" placeholder="+34 600 000 000">
-            </div>
-            <div class="form-group">
-                <label for="website">Sitio web actual (si aplica)</label>
-                <input type="url" id="website" name="website" placeholder="https://tuempresa.com">
-            </div>
-        </fieldset>
+  <form id="lead-form" novalidate>
 
-        <!-- 2. OBJETIVOS Y CONTEXTO -->
-        <fieldset>
-            <legend>2. Objetivos del Negocio</legend>
-            <div class="form-group">
-                <label for="industry">Industria o sector <span class="required">*</span></label>
-                <select id="industry" name="industry" required>
-                    <option value="">Selecciona una opción</option>
-                    <option value="Tecnología / Software">Tecnología / Software</option>
-                    <option value="E-commerce / Retail">E-commerce / Retail</option>
-                    <option value="Salud / Bienestar">Salud / Bienestar</option>
-                    <option value="Educación">Educación</option>
-                    <option value="Servicios Profesionales">Servicios Profesionales</option>
-                    <option value="Inmobiliaria">Inmobiliaria</option>
-                    <option value="Otro">Otro</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="goal">¿Qué debe lograr este proyecto? <span class="required">*</span></label>
-                <select id="goal" name="goal" required>
-                    <option value="">Selecciona una opción</option>
-                    <option value="Aumentar ventas / Generar leads">Aumentar ventas / Generar leads</option>
-                    <option value="Automatizar procesos internos">Automatizar procesos internos</option>
-                    <option value="Mejorar presencia de marca">Mejorar presencia de marca</option>
-                    <option value="Fidelizar clientes (App/SaaS)">Fidelizar clientes (App/SaaS)</option>
-                    <option value="Otro">Otro</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="audience">Describe a tu público objetivo</label>
-                <textarea id="audience" name="audience" rows="2" placeholder="Ej: Dueños de pequeñas empresas que buscan digitalizar su facturación..."></textarea>
-            </div>
-        </fieldset>
+    <!-- 1. IDENTIFICACIÓN -->
+    <fieldset>
+      <legend>01 · Identificación</legend>
+      <div class="form-group">
+        <label for="fullName">Nombre completo <span class="required">*</span></label>
+        <input type="text" id="fullName" name="fullName" required placeholder="Ej: Ana García">
+      </div>
+      <div class="form-group">
+        <label for="companyName">Empresa o proyecto <span class="required">*</span></label>
+        <input type="text" id="companyName" name="companyName" required placeholder="Ej: InnovaTech S.L.">
+      </div>
+      <div class="form-group">
+        <label for="email">Email corporativo <span class="required">*</span></label>
+        <input type="email" id="email" name="email" required placeholder="ana@innovatech.com">
+      </div>
+      <div class="form-group">
+        <label for="phone">Teléfono / WhatsApp</label>
+        <input type="tel" id="phone" name="phone" placeholder="+34 600 000 000">
+      </div>
+      <div class="form-group">
+        <label for="website">Sitio web actual</label>
+        <input type="url" id="website" name="website" placeholder="https://tuempresa.com">
+      </div>
+    </fieldset>
 
-        <!-- 3. ALCANCE DEL PROYECTO -->
-        <fieldset>
-            <legend>3. Detalles del Proyecto</legend>
-            <div class="form-group">
-                <label for="projectType">Tipo de solución <span class="required">*</span></label>
-                <select id="projectType" name="projectType" required>
-                    <option value="">Selecciona una opción</option>
-                    <option value="Landing Page / Web Corporativa">Landing Page / Web Corporativa</option>
-                    <option value="Tienda Online / E-commerce">Tienda Online / E-commerce</option>
-                    <option value="Aplicación Web (SaaS)">Aplicación Web (SaaS)</option>
-                    <option value="Aplicación Móvil">Aplicación Móvil</option>
-                    <option value="Sistema de Gestión Interno">Sistema de Gestión Interno</option>
-                    <option value="Rediseño de sitio existente">Rediseño de sitio existente</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>¿Qué funcionalidades clave necesitas?</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="features" value="Pasarela de pagos"> Pasarela de pagos</label>
-                    <label><input type="checkbox" name="features" value="Gestión de usuarios/roles"> Gestión de usuarios/roles</label>
-                    <label><input type="checkbox" name="features" value="Integración con API externa"> Integración con API externa</label>
-                    <label><input type="checkbox" name="features" value="Panel de administración"> Panel de administración</label>
-                    <label><input type="checkbox" name="features" value="CMS (Blog, contenidos)"> CMS (Blog, contenidos)</label>
-                    <label><input type="checkbox" name="features" value="Notificaciones automáticas"> Notificaciones automáticas</label>
-                    <label><input type="checkbox" name="features" value="Módulo de IA / Análisis de datos"> Módulo de IA / Análisis de datos</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="description">Descripción breve del reto o idea</label>
-                <textarea id="description" name="description" rows="3" placeholder="Cuéntanos un poco más sobre lo que quieres construir..."></textarea>
-            </div>
-        </fieldset>
+    <!-- 2. OBJETIVOS -->
+    <fieldset>
+      <legend>02 · Objetivos del negocio</legend>
+      <div class="form-group">
+        <label for="industry">Industria o sector <span class="required">*</span></label>
+        <select id="industry" name="industry" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Tecnología / Software">Tecnología / Software</option>
+          <option value="E-commerce / Retail">E-commerce / Retail</option>
+          <option value="Salud / Bienestar">Salud / Bienestar</option>
+          <option value="Educación">Educación</option>
+          <option value="Servicios Profesionales">Servicios Profesionales</option>
+          <option value="Inmobiliaria">Inmobiliaria</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="goal">¿Qué debe lograr el proyecto? <span class="required">*</span></label>
+        <select id="goal" name="goal" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Aumentar ventas / Generar leads">Aumentar ventas / Generar leads</option>
+          <option value="Automatizar procesos internos">Automatizar procesos internos</option>
+          <option value="Mejorar presencia de marca">Mejorar presencia de marca</option>
+          <option value="Fidelizar clientes (App/SaaS)">Fidelizar clientes (App/SaaS)</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="audience">Público objetivo</label>
+        <textarea id="audience" name="audience" rows="2" placeholder="Ej: Dueños de pequeñas empresas que buscan digitalizar su facturación…"></textarea>
+      </div>
+    </fieldset>
 
-        <!-- 4. REQUISITOS TÉCNICOS E INFRAESTRUCTURA -->
-        <fieldset>
-            <legend>4. Requisitos Técnicos e Infraestructura</legend>
-            <p style="font-size:13px; color:#6c757d; margin-top:0;">Esta información nos ayuda a determinar si tu solución necesita servidores dedicados o servicios en la nube.</p>
-            
-            <div class="form-group">
-                <label for="hosting">¿Ya cuentas con hosting o servidores?</label>
-                <select id="hosting" name="hosting">
-                    <option value="">Selecciona una opción</option>
-                    <option value="Sí, tengo hosting propio">Sí, tengo hosting propio</option>
-                    <option value="No, necesito que me asesoren">No, necesito que me asesoren</option>
-                    <option value="Tengo cuenta en la nube (AWS, Azure, GCP)">Tengo cuenta en la nube (AWS, Azure, GCP)</option>
-                    <option value="No estoy seguro">No estoy seguro</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="scalability">¿Esperas que la aplicación crezca rápidamente?</label>
-                <select id="scalability" name="scalability">
-                    <option value="">Selecciona una opción</option>
-                    <option value="Sí, espero un alto tráfico/usuarios">Sí, espero un alto tráfico/usuarios</option>
-                    <option value="Crecimiento moderado">Crecimiento moderado</option>
-                    <option value="Es un proyecto pequeño o interno">Es un proyecto pequeño o interno</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="database">¿Requiere base de datos compleja o almacenamiento masivo?</label>
-                <select id="database" name="database">
-                    <option value="">Selecciona una opción</option>
-                    <option value="Sí, manejará gran volumen de datos">Sí, manejará gran volumen de datos</option>
-                    <option value="No, solo datos básicos">No, solo datos básicos</option>
-                    <option value="No lo sé">No lo sé</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="techStack">¿Tienes preferencia por alguna tecnología específica? (Opcional)</label>
-                <input type="text" id="techStack" name="techStack" placeholder="Ej: React, Node.js, Python, etc.">
-            </div>
-        </fieldset>
+    <!-- 3. ALCANCE -->
+    <fieldset>
+      <legend>03 · Detalles del proyecto</legend>
+      <div class="form-group">
+        <label for="projectType">Tipo de solución <span class="required">*</span></label>
+        <select id="projectType" name="projectType" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Landing Page / Web Corporativa">Landing Page / Web Corporativa</option>
+          <option value="Tienda Online / E-commerce">Tienda Online / E-commerce</option>
+          <option value="Aplicación Web (SaaS)">Aplicación Web (SaaS)</option>
+          <option value="Aplicación Móvil">Aplicación Móvil</option>
+          <option value="Sistema de Gestión Interno">Sistema de Gestión Interno</option>
+          <option value="Rediseño de sitio existente">Rediseño de sitio existente</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Funcionalidades clave</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="features" value="Pasarela de pagos"> Pasarela de pagos</label>
+          <label><input type="checkbox" name="features" value="Gestión de usuarios/roles"> Gestión de usuarios/roles</label>
+          <label><input type="checkbox" name="features" value="Integración con API externa"> Integración API</label>
+          <label><input type="checkbox" name="features" value="Panel de administración"> Panel admin</label>
+          <label><input type="checkbox" name="features" value="CMS (Blog, contenidos)"> CMS</label>
+          <label><input type="checkbox" name="features" value="Notificaciones automáticas"> Notificaciones</label>
+          <label><input type="checkbox" name="features" value="Módulo de IA / Análisis de datos"> Módulo IA</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Descripción breve del reto o idea</label>
+        <textarea id="description" name="description" rows="3" placeholder="Cuéntanos qué quieres construir…"></textarea>
+      </div>
+    </fieldset>
 
-        <!-- 5. PRESUPUESTO Y PLAZO -->
-        <fieldset>
-            <legend>5. Presupuesto y Plazos</legend>
-            <div class="form-group">
-                <label for="budget">Presupuesto estimado <span class="required">*</span></label>
-                <select id="budget" name="budget" required>
-                    <option value="">Selecciona un rango</option>
-                    <option value="1.000 € - 3.000 €">1.000 € - 3.000 €</option>
-                    <option value="3.000 € - 6.000 €">3.000 € - 6.000 €</option>
-                    <option value="6.000 € - 12.000 €">6.000 € - 12.000 €</option>
-                    <option value="12.000 € - 25.000 €">12.000 € - 25.000 €</option>
-                    <option value="Más de 25.000 €">Más de 25.000 €</option>
-                    <option value="Aún no lo tengo definido">Aún no lo tengo definido</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="timeline">¿Para cuándo necesitas el lanzamiento? <span class="required">*</span></label>
-                <select id="timeline" name="timeline" required>
-                    <option value="">Selecciona una opción</option>
-                    <option value="Lo antes posible (1-2 meses)">Lo antes posible (1-2 meses)</option>
-                    <option value="En 3-6 meses">En 3-6 meses</option>
-                    <option value="En 6-12 meses">En 6-12 meses</option>
-                    <option value="Plazo flexible / Exploratorio">Plazo flexible / Exploratorio</option>
-                </select>
-            </div>
-        </fieldset>
+    <!-- 4. REQUISITOS TÉCNICOS -->
+    <fieldset>
+      <legend>04 · Requisitos técnicos</legend>
+      <p class="help-text">Nos ayuda a determinar si tu solución necesita servidores dedicados o servicios en la nube.</p>
+      <div class="form-group">
+        <label for="hosting">¿Cuentas con hosting o servidores?</label>
+        <select id="hosting" name="hosting">
+          <option value="">Selecciona una opción</option>
+          <option value="Sí, tengo hosting propio">Sí, tengo hosting propio</option>
+          <option value="No, necesito que me asesoren">No, necesito asesoría</option>
+          <option value="Tengo cuenta en la nube (AWS, Azure, GCP)">Tengo cuenta en la nube</option>
+          <option value="No estoy seguro">No estoy seguro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="scalability">¿Esperas crecimiento rápido?</label>
+        <select id="scalability" name="scalability">
+          <option value="">Selecciona una opción</option>
+          <option value="Sí, espero un alto tráfico/usuarios">Sí, alto tráfico/usuarios</option>
+          <option value="Crecimiento moderado">Crecimiento moderado</option>
+          <option value="Es un proyecto pequeño o interno">Proyecto pequeño o interno</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="database">¿Requiere base de datos compleja?</label>
+        <select id="database" name="database">
+          <option value="">Selecciona una opción</option>
+          <option value="Sí, manejará gran volumen de datos">Sí, gran volumen de datos</option>
+          <option value="No, solo datos básicos">No, solo datos básicos</option>
+          <option value="No lo sé">No lo sé</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="techStack">Tecnología preferida (opcional)</label>
+        <input type="text" id="techStack" name="techStack" placeholder="Ej: React, Node.js, Python…">
+      </div>
+    </fieldset>
 
-        <!-- 6. INFORMACIÓN ADICIONAL -->
-        <fieldset>
-            <legend>6. Información Adicional</legend>
-            <div class="form-group">
-                <label for="comments">¿Algo más que debamos saber?</label>
-                <textarea id="comments" name="comments" rows="3" placeholder="Ej: Ya tenemos un diseño UX/UI avanzado, buscamos solo desarrollo..."></textarea>
-            </div>
-        </fieldset>
+    <!-- 5. PRESUPUESTO -->
+    <fieldset>
+      <legend>05 · Presupuesto y plazo</legend>
+      <div class="form-group">
+        <label for="budget">Presupuesto estimado <span class="required">*</span></label>
+        <select id="budget" name="budget" required>
+          <option value="">Selecciona un rango</option>
+          <option value="1.000 € - 3.000 €">1.000 € – 3.000 €</option>
+          <option value="3.000 € - 6.000 €">3.000 € – 6.000 €</option>
+          <option value="6.000 € - 12.000 €">6.000 € – 12.000 €</option>
+          <option value="12.000 € - 25.000 €">12.000 € – 25.000 €</option>
+          <option value="Más de 25.000 €">Más de 25.000 €</option>
+          <option value="Aún no lo tengo definido">Aún no definido</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="timeline">Fecha de lanzamiento deseada <span class="required">*</span></label>
+        <select id="timeline" name="timeline" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Lo antes posible (1-2 meses)">Lo antes posible (1–2 meses)</option>
+          <option value="En 3-6 meses">En 3–6 meses</option>
+          <option value="En 6-12 meses">En 6–12 meses</option>
+          <option value="Plazo flexible / Exploratorio">Plazo flexible</option>
+        </select>
+      </div>
+    </fieldset>
 
-        <button type="submit" class="btn-submit">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-            </svg>
-            Enviar Solicitud por WhatsApp
-        </button>
-        <p class="form-note">Al enviar, se abrirá WhatsApp con tu solicitud lista para enviar a nuestro equipo.</p>
-    </form>
+    <!-- 6. EXTRA -->
+    <fieldset>
+      <legend>06 · Información adicional</legend>
+      <div class="form-group">
+        <label for="comments">¿Algo más que debamos saber?</label>
+        <textarea id="comments" name="comments" rows="3" placeholder="Ej: Ya tenemos UX/UI avanzado, buscamos solo desarrollo…"></textarea>
+      </div>
+    </fieldset>
+
+    <button type="submit" class="btn-submit">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+      Enviar por WhatsApp
+    </button>
+    <p class="form-note">Se abrirá WhatsApp con tu solicitud lista para enviar.</p>
+  </form>
 </div>
 
 <script>
-    // ⚠️ Cambia este número por el tuyo con código de país, SIN "+", espacios ni guiones.
-    const MI_WHATSAPP = "525665092869";
+  // ⚠️ Número destino: código país + número, sin +, sin espacios
+  const MI_WHATSAPP = "525665092869";
 
-    document.getElementById('lead-form').addEventListener('submit', function(e) {
-        e.preventDefault();
+  document.getElementById('lead-form').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-        // Recopilar valores
-        const get = (id) => document.getElementById(id).value.trim();
+    const get = (id) => (document.getElementById(id).value || "").trim();
 
-        // Funcionalidades (checkboxes)
-        const features = Array.from(
-            document.querySelectorAll('input[name="features"]:checked')
-        ).map(cb => "• " + cb.value).join("\n") || "No especificadas";
+    const features = Array.from(
+      document.querySelectorAll('input[name="features"]:checked')
+    ).map(cb => "• " + cb.value).join("\n") || "No especificadas";
 
-        // Construir el mensaje
-        const mensaje =
+    const mensaje =
 `🚀 *NUEVA SOLICITUD DE PROPUESTA*
 
 ━━━━━━━━━━━━━━━
-👤 *1. IDENTIFICACIÓN*
+👤 *01 · IDENTIFICACIÓN*
 ━━━━━━━━━━━━━━━
 *Nombre:* ${get('fullName')}
-*Empresa/Proyecto:* ${get('companyName')}
+*Empresa:* ${get('companyName')}
 *Email:* ${get('email')}
-*Teléfono:* ${get('phone') || 'No proporcionado'}
-*Web actual:* ${get('website') || 'No proporcionada'}
+*Teléfono:* ${get('phone') || '—'}
+*Web:* ${get('website') || '—'}
 
 ━━━━━━━━━━━━━━━
-🎯 *2. OBJETIVOS DEL NEGOCIO*
+🎯 *02 · OBJETIVOS*
 ━━━━━━━━━━━━━━━
 *Industria:* ${get('industry')}
-*Objetivo principal:* ${get('goal')}
-*Público objetivo:* ${get('audience') || 'No especificado'}
+*Objetivo:* ${get('goal')}
+*Público:* ${get('audience') || '—'}
 
 ━━━━━━━━━━━━━━━
-🛠️ *3. DETALLES DEL PROYECTO*
+🛠️ *03 · PROYECTO*
 ━━━━━━━━━━━━━━━
-*Tipo de solución:* ${get('projectType')}
-*Funcionalidades clave:*
+*Solución:* ${get('projectType')}
+*Funcionalidades:*
 ${features}
-*Descripción:* ${get('description') || 'Sin descripción adicional'}
+*Descripción:* ${get('description') || '—'}
 
 ━━━━━━━━━━━━━━━
-⚙️ *4. REQUISITOS TÉCNICOS*
+⚙️ *04 · REQUISITOS TÉCNICOS*
 ━━━━━━━━━━━━━━━
-*Hosting/Servidores:* ${get('hosting') || 'No especificado'}
-*Escalabilidad:* ${get('scalability') || 'No especificado'}
-*Base de datos:* ${get('database') || 'No especificado'}
-*Tecnologías preferidas:* ${get('techStack') || 'Sin preferencia'}
+*Hosting:* ${get('hosting') || '—'}
+*Escalabilidad:* ${get('scalability') || '—'}
+*Base de datos:* ${get('database') || '—'}
+*Tech preferida:* ${get('techStack') || 'Sin preferencia'}
 
 ━━━━━━━━━━━━━━━
-💰 *5. PRESUPUESTO Y PLAZO*
+💰 *05 · PRESUPUESTO Y PLAZO*
 ━━━━━━━━━━━━━━━
 *Presupuesto:* ${get('budget')}
 *Plazo:* ${get('timeline')}
 
 ━━━━━━━━━━━━━━━
-📝 *6. INFORMACIÓN ADICIONAL*
+📝 *06 · EXTRA*
 ━━━━━━━━━━━━━━━
-${get('comments') || 'Sin comentarios adicionales'}
+${get('comments') || '—'}
 
 ━━━━━━━━━━━━━━━
 _Enviado desde el formulario web_`;
 
-        // Codificar y abrir WhatsApp
-        const url = `https://wa.me/${MI_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
+    const url = `https://wa.me/${MI_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
+    const successMsg = document.getElementById('successMsg');
+    successMsg.classList.add('show');
+    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // Mostrar mensaje de éxito
-        const successMsg = document.getElementById('successMsg');
-        successMsg.style.display = 'block';
-        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    window.open(url, '_blank');
 
-        // Abrir WhatsApp (en nueva pestaña en desktop, o app en móvil)
-        window.open(url, '_blank');
-
-        // Resetear formulario tras un momento
-        setTimeout(() => {
-            this.reset();
-            successMsg.style.display = 'none';
-        }, 4000);
-    });
+    setTimeout(() => {
+      this.reset();
+      successMsg.classList.remove('show');
+    }, 4000);
+  });
 </script>
 
 </body>
